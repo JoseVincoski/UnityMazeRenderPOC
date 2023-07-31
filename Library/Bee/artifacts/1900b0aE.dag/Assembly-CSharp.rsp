@@ -355,6 +355,7 @@
 "Assets/Scripts/MazeGenerators/Generators/V2/MazeGenV2.cs"
 "Assets/Scripts/MazeGenerators/Generators/V2/Models/TileInfo.cs"
 "Assets/Scripts/MazeGenerators/Generators/V2/Models/TilesAroundInfo.cs"
+"Assets/Scripts/MazeGenerators/GenVersions.cs"
 "Assets/Scripts/MazeGenerators/IGenerator.cs"
 "Assets/Scripts/MazeGenerators/MazeGenerator.cs"
 "Assets/Scripts/MazeScript.cs"

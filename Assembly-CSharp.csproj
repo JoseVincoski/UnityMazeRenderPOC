@@ -60,8 +60,8 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Models\Enums\TileDirection.cs" />
     <Compile Include="Assets\Scripts\Models\Maze.cs" />
-    <Compile Include="Assets\Scripts\Models\Enums\TileType.cs" />
     <Compile Include="Assets\Scripts\MazeGenerators\Generators\V2\Models\TileInfo.cs" />
+    <Compile Include="Assets\Scripts\Models\Enums\TileType.cs" />
     <Compile Include="Assets\Scripts\MazeGenerators\GenVersions.cs" />
     <Compile Include="Assets\Scripts\Models\MazeTile.cs" />
     <Compile Include="Assets\Scripts\MazeScript.cs" />

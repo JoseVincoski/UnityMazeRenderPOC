@@ -9,8 +9,8 @@ namespace MazeGenerators.Generators
 {
     public interface IGenerator
     {
-        public void GenerateMaze(ref Maze maze, float renderSpeed) { throw new NotImplementedException(); }
-        public void RenderBase(ref Maze maze, Transform parent, float renderSpeed)
+        public IEnumerator GenerateMaze(Maze maze, bool slowly) { throw new NotImplementedException(); }
+        public void RenderBase(ref Maze maze, Transform parent)
         {
             for (int row = 0; row < maze.Height; row++)
             {
@@ -29,7 +29,7 @@ namespace MazeGenerators.Generators
                         else
                         {
                             tile.GameObject.name = "HFrame";
-                            tile.TileType = TileType.SolidWall;
+                            tile.TileType = TileType.MazeFrame;
                         }
                     }
                     else if (column == 0 || column == maze.Width - 1)
@@ -43,7 +43,7 @@ namespace MazeGenerators.Generators
                         {
                             tile.GameObject.name = "VFrame";
                             tile.GameObject.transform.Rotate(0, 0, 90);
-                            tile.TileType = TileType.SolidWall;
+                            tile.TileType = TileType.MazeFrame;
                         }
                     }
                     else if (row % 2 == 0)
@@ -98,83 +98,6 @@ namespace MazeGenerators.Generators
             }
 
             maze.Tiles[targetRow, targetColumn].TileType = TileType.Target;
-        }
-
-        public IEnumerator SlowlyGenerateMaze(Maze maze, float renderSpeed) { throw new NotImplementedException(); }
-        public IEnumerator SlowlyRenderBase(Maze maze, Transform parent, float renderSpeed)
-        {
-            for (int row = 0; row < maze.Height; row++)
-            {
-                for (int column = 0; column < maze.Width; column++)
-                {
-                    var tile = new MazeTile(parent);
-                    tile.GameObject.transform.position = new Vector3(parent.position.x + column * 2, parent.position.y + row * 2, parent.position.z);
-
-                    if (row == 0 || row == maze.Height - 1)
-                    {
-                        if (column == 0 || column == maze.Height - 1)
-                        {
-                            tile.GameObject.name = "PillarFrame";
-                            tile.TileType = TileType.Pillar;
-                        }
-                        else
-                        {
-                            tile.GameObject.name = "HFrame";
-                            tile.TileType = TileType.SolidWall;
-                        }
-                    }
-                    else if (column == 0 || column == maze.Width - 1)
-                    {
-                        if (row == 0 || row == maze.Height - 1)
-                        {
-                            tile.GameObject.name = "PillarFrame";
-                            tile.TileType = TileType.Pillar;
-                        }
-                        else
-                        {
-                            tile.GameObject.name = "VFrame";
-                            tile.GameObject.transform.Rotate(0, 0, 90);
-                            tile.TileType = TileType.SolidWall;
-                        }
-                    }
-                    else if (row % 2 == 0)
-                    {
-                        if (column % 2 == 0)
-                        {
-                            tile.GameObject.name = "FixedPillar";
-                            tile.TileType = TileType.Pillar;
-                        }
-                        else
-                        {
-                            tile.GameObject.name = "HWall";
-                            tile.TileType = TileType.MovableWall;
-                        }
-                    }
-                    else if (column % 2 == 0)
-                    {
-                        if (row % 2 == 0)
-                        {
-                            tile.GameObject.name = "FixedPillar";
-                            tile.TileType = TileType.Pillar;
-                        }
-                        else
-                        {
-                            tile.GameObject.name = "VWall";
-                            tile.GameObject.transform.Rotate(0, 0, 90);
-                            tile.TileType = TileType.MovableWall;
-                        }
-                    }
-                    else
-                    {
-                        tile.GameObject.name = "Path";
-                        tile.TileType = TileType.Path;
-                    }
-
-                    maze.Tiles[row, column] = tile;
-                    yield return new WaitForSeconds(renderSpeed);
-                }
-                yield return new WaitForSeconds(renderSpeed);
-            }
         }
     }
 }

@@ -3,12 +3,16 @@ namespace Models.Enums
     public enum TileType
     {
         Path = 0,
-        MovableWall = 1,
-        SolidWall = 2,
-        Start = 3,
-        Target = 4,
-        OutsideFrame = 5,
-        VerifiedPath = 6,
-        Pillar = 7,
+
+        Start = 2,
+        Target = 3,
+
+        MovableWall = 4,
+        SolidWall = 5,
+
+        Pillar = 6,
+        MazeFrame = 7,
+
+        OutsideFrame = 8,
     }
 }

@@ -10,11 +10,13 @@ namespace MazeGenerators.Generators.V2.Models
     {
         private MazePosition basePosition;
         private Maze maze;
-        private Random RNG = new Random((int)DateTime.Now.Ticks);
+        private Random RNG = new System.Random(); 
 
         public List<TileInfo> TileInfos = new List<TileInfo>();
-        public List<TileInfo> MovableWalls { get { UpdateTiles(); return GetTileType(TileType.MovableWall); } }
 
+        public List<TileInfo> MovableWalls { get { UpdateTiles(); return GetTileType(TileType.MovableWall); } }
+        public List<TileInfo> Paths { get { UpdateTiles(); return GetTileType(TileType.Path); } }
+        public List<TileInfo> SolidWalls { get { UpdateTiles(); return GetTileType(TileType.SolidWall); } }
 
         public TilesAroundInfo(Maze maze, int Y, int X)
         {

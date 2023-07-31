@@ -42,11 +42,12 @@ namespace MazeGenerators.Models
                     this.GameObject.transform.position = new Vector3(
                         this.GameObject.transform.position.x,
                         this.GameObject.transform.position.y,
-                        this.GameObject.transform.position.z + 1
+                        1
                         );
                     this.GameObject.GetComponent<MeshRenderer>().material.color = PathColor;
                     break;
                 case TileType.SolidWall:
+                case TileType.MazeFrame:
                     this.GameObject.transform.localScale = new Vector3(3, 1, 1);
                     this.GameObject.GetComponent<MeshRenderer>().material.color = SolidWallColor;
                     break;

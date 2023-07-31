@@ -1,4 +1,5 @@
 using Models;
+using System.Text;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -15,26 +16,18 @@ namespace MazeGenerators.Generators
             Maze = new Maze(_mazeHeight, _mazeWidth);
             Generator = _generator;
         }
-        public void RenderBase(Transform parent, float renderSpeed)
+        public void RenderBase(Transform parent)
         {
-            Generator.RenderBase(ref Maze, parent, renderSpeed);
+            Generator.RenderBase(ref Maze, parent);
         }
         public void GenerateInterestPoints()
         {
             Generator.GenerateInterestPoints(ref Maze);
         }
 
-        public void GenerateMaze(float renderSpeed)
+        public void GenerateMaze(bool slowly)
         {
-            Generator.GenerateMaze(ref Maze, renderSpeed);
-        }
-        public void SlowlyRenderBase(Transform parent, float renderSpeed)
-        {
-            StartCoroutine(Generator.SlowlyRenderBase(Maze, parent, renderSpeed));
-        }
-        public void SlowlyGenerateMaze(float renderSpeed)
-        {
-            StartCoroutine(Generator.SlowlyGenerateMaze(Maze, renderSpeed));
+            StartCoroutine(Generator.GenerateMaze(Maze, slowly));
         }
 
         public void UnloadMaze()

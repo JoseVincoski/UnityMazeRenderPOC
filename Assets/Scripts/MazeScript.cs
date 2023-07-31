@@ -3,16 +3,16 @@ using MazeGenerators.Generators.V2;
 using Models;
 using System;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class MazeScript : MonoBehaviour
 {
-    public float renderSpeed;
     private Maze Maze;
     private GameObject MazeContainer;
     private MazeGenerator generator;
-    private IGenerator genVersion;
+    private MazeGenV2 genVersion;
 
     public int mazeHeight = 5;
     public int mazeWidth = 5;
@@ -29,8 +29,7 @@ public class MazeScript : MonoBehaviour
     {
         if (Maze == null) GenerateBase(false);
 
-        if (slowly) generator.SlowlyGenerateMaze(renderSpeed);
-        else generator.GenerateMaze(renderSpeed);
+        generator.GenerateMaze(slowly);
     }
     public void UnloadMaze()
     {
@@ -41,22 +40,34 @@ public class MazeScript : MonoBehaviour
     {
         if (Maze == null) InitializeGenerator();
 
-        if (slowly) generator.SlowlyRenderBase(MazeContainer.transform, renderSpeed);
-        else generator.RenderBase(MazeContainer.transform, renderSpeed);
+        generator.RenderBase(MazeContainer.transform);
     }
-
     public void GenerateInterestPoints()
     {
         if (Maze == null) throw new Exception("Can't generate points if maze is null");
 
         generator.GenerateInterestPoints();
     }
-
     private MazeGenerator InitializeGenerator()
     {
         generator.InitializeGenerator(genVersion, mazeHeight, mazeWidth);
         Maze = generator.Maze;
 
         return generator;
+    }
+
+    public void PrintMaze()
+    {
+        var sb = new StringBuilder();
+        for (int row  = 0; row < generator.Maze.Height; row++)
+        {
+            for (int column = 0;  column < generator.Maze.Width; column++)
+            {
+                sb.Append((int)generator.Maze.Tiles[row, column].TileType);
+            }
+            sb.AppendLine();
+        }
+
+        Debug.Log(sb.ToString());
     }
 }
